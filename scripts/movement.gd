@@ -8,8 +8,9 @@ var direction = Vector2(1.0, 0.0)
 const MOVE_SPEED = 150
 
 func _ready():
-    screen_size = get_viewport_rect().size
-    set_process(true)
+	screen_size = get_viewport_rect().size
+	set_process(true)
+	get_node("moveAnim").initilizeLines()
 
 func _process(delta):
 	# Move left pad
