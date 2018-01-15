@@ -14,7 +14,7 @@ func _ready():
 
 func _process(delta):
 	# Move left pad
-	var player_pos = get_node("player").get_pos()
+	var player_pos = get_node("./playerKinematic2D/player").get_pos()
 
 	if (Input.is_action_pressed("move_left")):
     	player_pos.x += -MOVE_SPEED * delta
@@ -26,5 +26,5 @@ func _process(delta):
 	if (Input.is_action_pressed("move_down")):
     	player_pos.y += MOVE_SPEED * delta
 
-	get_node("player").set_pos(player_pos)
-	get_node("moveAnim").update()
+	get_node("./playerKinematic2D/player").set_pos(player_pos)
+	get_node("./moveAnim").update()
