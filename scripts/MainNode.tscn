@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=1]
+[gd_scene load_steps=8 format=1]
 
-[ext_resource path="res://scripts/movement.gd" type="Script" id=1]
-[ext_resource path="res://scripts/playerCollision.gd" type="Script" id=2]
-[ext_resource path="res://pictures/player.png" type="Texture" id=3]
-[ext_resource path="res://scripts/moveAnim.gd" type="Script" id=4]
-[ext_resource path="res://pictures/ground.png" type="Texture" id=5]
-[ext_resource path="res://scripts/objectCollider.gd" type="Script" id=6]
+[ext_resource path="res://scripts/playerMovement.gd" type="Script" id=1]
+[ext_resource path="res://pictures/player.png" type="Texture" id=2]
+[ext_resource path="res://scripts/moveAnim.gd" type="Script" id=3]
+[ext_resource path="res://pictures/ground.png" type="Texture" id=4]
+[ext_resource path="res://scripts/objectCollider.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -19,25 +18,44 @@ extents = Vector2( 10, 10 )
 
 [node name="MainNode" type="Node2D"]
 
-script/script = ExtResource( 1 )
+[node name="playerMain" type="RigidBody2D" parent="."]
 
-[node name="playerKinematic2D" type="KinematicBody2D" parent="."]
-
+transform/pos = Vector2( -3.01465, -19.5954 )
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 2, 0, 0, 2, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
-collision/margin = 0.08
-script/script = ExtResource( 2 )
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 0.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+velocity/linear = Vector2( 0, 0 )
+velocity/angular = 0.0
+damp_override/linear = 10.0
+damp_override/angular = -1.0
+script/script = ExtResource( 1 )
 
-[node name="player" type="Sprite" parent="playerKinematic2D"]
+[node name="player" type="Sprite" parent="playerMain"]
 
-editor/display_folded = true
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 
-[node name="Camera2D" type="Camera2D" parent="playerKinematic2D/player"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="playerMain"]
+
+transform/scale = Vector2( 2, 2 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Camera2D" type="Camera2D" parent="playerMain"]
 
 anchor_mode = 1
 rotating = false
@@ -56,23 +74,16 @@ drag_margin/top = 0.2
 drag_margin/right = 0.2
 drag_margin/bottom = 0.2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="playerKinematic2D"]
-
-transform/scale = Vector2( 2, 2 )
-shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
-
 [node name="moveAnim" type="Node2D" parent="."]
 
-script/script = ExtResource( 4 )
+script/script = ExtResource( 3 )
 
 [node name="ground" type="Sprite" parent="."]
 
 transform/pos = Vector2( 3.34033, 80.116 )
-texture = ExtResource( 5 )
+texture = ExtResource( 4 )
 
-[node name="thecollidertocollid" type="Area2D" parent="."]
+[node name="colid" type="Area2D" parent="."]
 
 transform/pos = Vector2( 165.861, 4.54414 )
 input/pickable = false
@@ -83,13 +94,13 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-script/script = ExtResource( 6 )
+script/script = ExtResource( 5 )
 
-[node name="Sprite" type="Sprite" parent="thecollidertocollid"]
+[node name="Sprite" type="Sprite" parent="colid"]
 
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="thecollidertocollid"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="colid"]
 
 shape = SubResource( 2 )
 trigger = false
