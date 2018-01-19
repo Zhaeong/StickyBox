@@ -20,7 +20,8 @@ extents = Vector2( 10, 10 )
 
 [node name="playerMain" type="RigidBody2D" parent="."]
 
-transform/pos = Vector2( -3.01465, -19.5954 )
+editor/display_folded = true
+transform/pos = Vector2( -1.50732, 15.0734 )
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 2, 0, 0, 2, 0, 0 )
@@ -83,9 +84,9 @@ script/script = ExtResource( 3 )
 transform/pos = Vector2( 3.34033, 80.116 )
 texture = ExtResource( 4 )
 
-[node name="colid" type="Area2D" parent="."]
+[node name="colid_right" type="Area2D" parent="."]
 
-transform/pos = Vector2( 165.861, 4.54414 )
+transform/pos = Vector2( 66.3764, 15.0955 )
 input/pickable = false
 shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
@@ -96,11 +97,36 @@ linear_damp = 0.1
 angular_damp = 1.0
 script/script = ExtResource( 5 )
 
-[node name="Sprite" type="Sprite" parent="colid"]
+[node name="Sprite" type="Sprite" parent="colid_right"]
 
+visibility/visible = false
 texture = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="colid"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="colid_right"]
+
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+
+[node name="colid_left" type="Area2D" parent="."]
+
+transform/pos = Vector2( -97.9238, 15.0955 )
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="colid_left"]
+
+visibility/visible = false
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="colid_left"]
 
 shape = SubResource( 2 )
 trigger = false
